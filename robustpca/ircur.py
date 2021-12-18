@@ -6,10 +6,10 @@ from .utils import time_printer
 
 
 def thresholding(mat: np.ndarray, threshold: float) -> np.ndarray:
-    #new_mat = np.copy(mat)
-    #new_mat[np.abs(new_mat) < threshold] = 0
-    #return new_mat
-    return np.sign(mat)* np.maximum(np.abs(mat) - threshold, np.zeros(mat.shape))
+    # new_mat = np.copy(mat)
+    # new_mat[np.abs(new_mat) < threshold] = 0
+    # return new_mat
+    return np.sign(mat) * np.maximum(np.abs(mat) - threshold, np.zeros(mat.shape))
 
 
 def best_approximator(mat: np.ndarray, rank: float) -> np.ndarray:
@@ -71,7 +71,7 @@ class IRCUR:
             R = (data_mat - S)[I, :]
             U = best_approximator((data_mat - S)[I, :][:, J], rank)
             L = C @ sp.linalg.pinv(U) @ R
-            
+
             it += 1
 
         if verbose:

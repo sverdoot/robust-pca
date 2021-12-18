@@ -53,3 +53,10 @@ class PCP:
             print(f'Iteration: {it}, error: {self.term_criteria(data_mat, L, S, tol=tol)[1]}, terminating alg.')
         
         return L, S
+
+
+ class StablePCP:
+    def __init__(self) -> None:
+         pass
+
+    

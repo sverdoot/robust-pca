@@ -3,7 +3,7 @@ name = "robustpca"
 version = "0.1.0"
 description = "Robust PCA"
 authors = [
-    "Egeny Lagutin <lagutin.em@phystech.edu>",
+    "Evgeny Lagutin <lagutin.em@phystech.edu>",
     "Ilya Dubovitsky"
 ]
 license = "MIT"

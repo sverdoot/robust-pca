@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Robust PCA"
 authors = [
     "Evgeny Lagutin <lagutin.em@phystech.edu>",
-    "Ilya Dubovitsky"
+    "Ilya Dubovitsky" <Ilya.Dubovitskii@skoltech.ru>
 ]
 license = "MIT"
 readme = "README.md"

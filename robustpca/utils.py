@@ -8,6 +8,7 @@ def time_printer(func):
         s = time.time()
         result = func(*args, **kwargs)
         e = time.time()
-        print(f'Elapsed: {e - s:.2f}')
+        print(f"Elapsed: {e - s:.2f}")
         return result
+
     return with_time

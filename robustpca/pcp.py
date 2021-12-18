@@ -1,42 +1,43 @@
 import numpy as np
 import scipy as sp
 import scipy.linalg
-
 from tqdm import tqdm
 
-from.utils import time_printer
+from .utils import time_printer
 
 
 def shrinkage(mat: np.ndarray, thresh: float) -> np.ndarray:
     return np.sign(mat) * np.maximum(np.abs(mat) - thresh, np.zeros(mat.shape))
 
+
 def sv_thresholding(mat: np.ndarray, thresh: float) -> np.ndarray:
     U, s, V = sp.linalg.svd(mat, full_matrices=False)
     s = shrinkage(s, thresh)
-    return np.dot(U, np.dot(np.diag(s), V))
-    # return U @ np.diag(s) @ V
+    return U @ np.diag(s) @ V
 
 
 class PCP:
+    """Robust PCA (Principal Component Percuit) via Augmented Lagrangian Multipliers"""
+
     def __init__(self):
         pass
 
     @staticmethod
     def term_criteria(D, L, S, tol=1e-3):
-        diff = np.linalg.norm(D - L - S, ord='fro') / np.linalg.norm(D, ord='fro')
-        if np.linalg.norm(D - L - S, ord='fro') / np.linalg.norm(D, ord='fro') < tol:
+        diff = np.linalg.norm(D - L - S, ord="fro") / np.linalg.norm(D, ord="fro")
+        if diff < tol:
             return True, diff
         else:
             return False, diff
 
     @staticmethod
     def default_mu(data_mat):
-        return .25 / np.abs(data_mat).mean()
+        return 0.25 / np.abs(data_mat).mean()
 
     @time_printer
     def decompose(self, data_mat, mu, max_iter=1e4, tol=1e-7, verbose=False):
         n, m = data_mat.shape
-        lamda = 1. / (max(n, m))**.5
+        lamda = 1.0 / (max(n, m)) ** 0.5
         mu_inv = mu ** (-1)
         S = np.zeros(data_mat.shape)
         Y = np.zeros(data_mat.shape)
@@ -50,13 +51,57 @@ class PCP:
             it += 1
 
         if verbose:
-            print(f'Iteration: {it}, error: {self.term_criteria(data_mat, L, S, tol=tol)[1]}, terminating alg.')
-        
+            print(
+                f"Iteration: {it}, error: {self.term_criteria(data_mat, L, S, tol=tol)[1]}, terminating alg."
+            )
+
         return L, S
 
 
- class StablePCP:
+class StablePCP:
     def __init__(self) -> None:
-         pass
+        pass
 
-    
+    @staticmethod
+    def default_mu(data_mat, sigma):
+        return 1.0 / ((2 * np.max(data_mat.shape) ** 0.5 * sigma))
+        # return ((2 * np.max(data_mat.shape) ** .5 * sigma))
+
+    @staticmethod
+    def term_criteria(L, S, L_prev, S_prev, tol=1e-3):
+        diff = (
+            np.linalg.norm(L - L_prev, ord="fro") ** 2 + np.linalg.norm(S - S_prev, ord="fro") ** 2
+        )
+        if diff < tol:
+            return True, diff
+        else:
+            return False, diff
+
+    @time_printer
+    def decompose(self, data_mat, mu, max_iter=1e4, tol=1e-7, verbose=False):
+        n, m = data_mat.shape
+        lamda = 1.0 / (max(n, m)) ** 0.5
+        mu_inv = mu ** (-1)
+        S = np.zeros(data_mat.shape)
+        L = np.zeros(data_mat.shape)
+
+        L_prev = L
+        S_prev = S
+
+        it = 0
+        while (
+            not self.term_criteria(L, S, L_prev, S_prev, tol=tol)[0] and it < max_iter
+        ) or it == 0:
+            L_prev = L
+            S_prev = S
+
+            L = sv_thresholding(data_mat - S, mu_inv)
+            S = shrinkage(data_mat - L, lamda * mu_inv)
+            it += 1
+
+        if verbose:
+            print(
+                f"Iteration: {it}, diff: {self.term_criteria(L, S, L_prev, S_prev, tol=tol)[1]}, terminating alg."
+            )
+
+        return L, S

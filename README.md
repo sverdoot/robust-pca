@@ -2,9 +2,11 @@
 
 - [Robust PCA](#robust-pca)
   - [Intro](#intro)
+  - [Examples](#examples)
+  - [Experiments accomplished](#Experiments accomplished)
+  - [Repository structure](#Repository structure)
   - [Installation](#installation)
-  - [Usage](#usage)
-  - [Citing](#citing)
+  - [Results](#results)
 
 ## Intro
 
@@ -17,6 +19,8 @@ This repository provides implementation of the following algorithms:
 * PCP with compressed data via alternating directions: [Robust PCA with compressed data, Ha and Barber, 2011](https://proceedings.neurips.cc/paper/2015/hash/c44e503833b64e9f27197a484f4257c0-Abstract.html)
 
 * Iterated Robust CUR: [Rapid Robust Principal Component Analysis: CUR Accelerated Inexact Low Rank Estimation, Cai et. al, 2021](https://arxiv.org/abs/2010.07422)
+
+## Examples
 
 ### Extracting activities on video surveillance
 Example of solving Principle Component Pusuit using Augmented Lagrangian Multipliers method 

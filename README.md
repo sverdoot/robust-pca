@@ -2,9 +2,11 @@
 
 - [Robust PCA](#robust-pca)
   - [Intro](#intro)
+  - [Examples](#examples)
+  - [Experiments accomplished](#experiments-accomplished)
+  - [Repository structure](#repository-structure)
   - [Installation](#installation)
-  - [Usage](#usage)
-  - [Citing](#citing)
+  - [Results](#results)
 
 ## Intro
 
@@ -18,6 +20,36 @@ This repository provides implementation of the following algorithms:
 
 * Iterated Robust CUR: [Rapid Robust Principal Component Analysis: CUR Accelerated Inexact Low Rank Estimation, Cai et. al, 2021](https://arxiv.org/abs/2010.07422)
 
+## Examples
+
+### Extracting activities on video surveillance
+Example of solving Principle Component Pusuit using Augmented Lagrangian Multipliers method 
+for decomposing video frames (1-st row) into static background (2-nd row) and dynamic foreground (3-rd row)
+<p align="center"><img src="figs/pcp_mall.png" width="700" /></p>
+
+### Removing shadows from face images
+Example of solving Principle Component Pusuit using Augmented Lagrangian Multipliers method 
+for decomposing face images (1-st row) into low-rank face approximation (2-nd row) and sparse shadows (3-rd row)
+<p align="center"><img src="figs/pcp_yale.png" width="700" /></p>
+
+## Experiments accomplished
+We compare different tasks for removing shadows from face images and extracting background/foreground from video frames:
+1. PCP via ALM
+2. Stable PCP via alternating directions
+3. PCP with compressed data via alternating directions
+4. PCP via Iterated Robust CUR
+
+We also demonstrate RPCA with compressed data by applying it to compressed YALE face dataset.
+
+## Repository structure
+- ```notebooks/``` — contains experiments in form of jupyter notebooks \
+    ```├── demo_mall.ipynb``` — demonstration of extracting activities from video surveillance \
+    ```├── demo_yale.ipynb``` — demonstration of removing shadows from face images\
+    ```├── RPCA with compressed data.ipynb``` — demonstration solving RPCA with compressed images\
+- ```data/``` — folder for relevant datasets
+- ```robustpca/``` — related source code with implementation of algorithms
+- ```figs/``` — pictures for the [results](#results) part
+- ```runs/``` — bash scripts to run experiments
 
 ## Installation
 
@@ -41,7 +73,34 @@ wget https://personal.ie.cuhk.edu.hk/\~ccloy/files/datasets/mall_dataset.zip -P 
 unzip data/mall_dataset.zip -d data
 ```
 
-## Usage
+## Results
+### Extracting activities on video surveillance
 
-## Citing
+#### PCP via ALM
+<p align="center"><img src="figs/pcp_mall.png" width="700" /></p>
+
+---
+#### Stable PCP via alternating directions
+<p align="center"><img src="figs/stable_pcp_mall.png" width="700" /></p>
+
+---
+#### PCP via IRCUR
+<p align="center"><img src="figs/ircur_mall.png" width="700" /></p>
+
+---
+
+### Removing shadows from face images
+
+#### PCP via ALM
+<p align="center"><img src="figs/pcp_yale.png" width="700" /></p>
+
+---
+#### Stable PCP via alternating directions
+<p align="center"><img src="figs/stable_pcp_yale.png" width="700" /></p>
+
+---
+#### PCP via IRCUR
+<p align="center"><img src="figs/ircur_yale.png" width="700" /></p>
+
+---
 

@@ -135,9 +135,6 @@ class CompressedPCP:
 
         it = 0
         while (not self.term_criteria(Y, P, S, C, tol=tol)[0] and it < max_iter) or it == 0:
-            # print(f'{it=}')
-            # print(f'{S=}')
-            # print(f'{P=}')
             P = sv_thresholding(Y - S @ C, mu_inv)
             pinv = np.linalg.pinv(C @ C.T)
             thresh = lamda * (np.ones((n, d)) @ pinv)

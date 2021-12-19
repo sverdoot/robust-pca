@@ -1,8 +1,9 @@
+from typing import Union
+
 import numpy as np
 import scipy as sp
 import scipy.linalg
 from tqdm import tqdm
-from typing import Union
 
 from .utils import time_printer
 
@@ -109,7 +110,6 @@ class StablePCP:
 
 
 class CompressedPCP:
-
     def __init__(self):
         pass
 
@@ -123,7 +123,7 @@ class CompressedPCP:
 
     @staticmethod
     def default_mu(Y):
-        return .25 / np.mean(np.abs(Y))
+        return 0.25 / np.mean(np.abs(Y))
 
     @time_printer
     def decompose(self, Y, C, mu, d, max_iter=1e4, tol=1e-7, verbose=False, lamda=None):
@@ -134,7 +134,7 @@ class CompressedPCP:
         P = np.zeros((n, m))
 
         it = 0
-        while (not self.term_criteria(Y, P, S, C, tol=tol)[0] and it < max_iter ) or it == 0:
+        while (not self.term_criteria(Y, P, S, C, tol=tol)[0] and it < max_iter) or it == 0:
             # print(f'{it=}')
             # print(f'{S=}')
             # print(f'{P=}')

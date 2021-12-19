@@ -72,25 +72,30 @@ unzip data/mall_dataset.zip -d data
 ## Results
 ### Extracting activities on video surveillance
 
-#### PCP via ALM
-<p align="center"><img src="figs/pcp_mall.pdf" width="700" /></p>
+<p align="center"><img alt="PCP via ALM" src="figs/pcp_mall.pdf" width="700" /></p>
+
 ---
 #### Stable PCP via alternating directions
 <p align="center"><img src="figs/stable_pcp_mall.pdf" width="700" /></p>
+
 ---
 #### PCP via IRCUR
 <p align="center"><img src="figs/ircur_mall.pdf" width="700" /></p>
+
 ---
 
 ### Removing shadows from face images
 
 #### PCP via ALM
 <p align="center"><img src="figs/pcp_yale.pdf" width="700" /></p>
+
 ---
 #### Stable PCP via alternating directions
 <p align="center"><img src="figs/stable_pcp_yale.pdf" width="700" /></p>
+
 ---
 #### PCP via IRCUR
 <p align="center"><img src="figs/ircur_yale.pdf" width="700" /></p>
+
 ---
 

@@ -30,6 +30,7 @@ seaborn = "^0.11.2"
 tqdm = "^4.62.3"
 cvxpy = "^1.1.17"
 opencv-python = "^4.5.4"
+cvxopt = "^1.2.7"
 
 
 [tool.poetry.scripts]

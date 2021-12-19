@@ -2,11 +2,12 @@ import numpy as np
 import scipy as sp
 import scipy.linalg
 from tqdm import tqdm
+from typing import Union
 
 from .utils import time_printer
 
 
-def shrinkage(mat: np.ndarray, thresh: float) -> np.ndarray:
+def shrinkage(mat: np.ndarray, thresh: Union[np.ndarray, float]) -> np.ndarray:
     return np.sign(mat) * np.maximum(np.abs(mat) - thresh, np.zeros(mat.shape))
 
 
@@ -122,24 +123,26 @@ class CompressedPCP:
 
     @staticmethod
     def default_mu(Y):
-        return np.mean(np.abs(Y)) / 4
+        return .25 / np.mean(np.abs(Y))
 
     @time_printer
-    def decompose(self, Y, C, mu, d, max_iter=1e4, tol=1e-7, verbose=False):
+    def decompose(self, Y, C, mu, d, max_iter=1e4, tol=1e-7, verbose=False, lamda=None):
         n, m = Y.shape
-        lamda = 1.0 / (max(n, m)) ** 0.5
+        lamda = lamda if lamda else 1.0 / (max(n, m)) ** 0.5
         mu_inv = mu ** (-1)
         S = np.zeros((n, d))
         P = np.zeros((n, m))
 
         it = 0
-        while not self.term_criteria(Y, P, S, C, tol=tol)[0] and it < max_iter:
-            print(f'{it=}')
-            print(f'{S=}')
-            print(f'{P=}')
+        while (not self.term_criteria(Y, P, S, C, tol=tol)[0] and it < max_iter ) or it == 0:
+            # print(f'{it=}')
+            # print(f'{S=}')
+            # print(f'{P=}')
             P = sv_thresholding(Y - S @ C, mu_inv)
-            norm_inv = np.linalg.inv(C @ C.T)
-            S = shrinkage((Y - P) @ C.T @ norm_inv, lamda * np.ones((n, d)) @ norm_inv)
+            pinv = np.linalg.pinv(C @ C.T)
+            thresh = lamda * (np.ones((n, d)) @ pinv)
+            thresh = np.maximum(np.zeros((n, d)), lamda * (np.ones((n, d)) @ pinv))
+            S = shrinkage((Y - P) @ C.T @ pinv, thresh)
             it += 1
 
         if verbose:

@@ -3,8 +3,8 @@
 - [Robust PCA](#robust-pca)
   - [Intro](#intro)
   - [Examples](#examples)
-  - [Experiments accomplished](#Experiments accomplished)
-  - [Repository structure](#Repository structure)
+  - [Experiments accomplished](#experiments-accomplished)
+  - [Repository structure](#repository-structure)
   - [Installation](#installation)
   - [Results](#results)
 

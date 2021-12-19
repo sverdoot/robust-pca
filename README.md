@@ -21,12 +21,12 @@ This repository provides implementation of the following algorithms:
 ### Extracting activities on video surveillance
 Example of solving Principle Component Pusuit using Augmented Lagrangian Multipliers method 
 for decomposing video frames (1-st row) into static background (2-nd row) and dynamic foreground (3-rd row)
-<p align="center"><img src="figs/pcp_mall" width="700" /></p>
+<p align="center"><img src="figs/pcp_mall.png" width="700" /></p>
 
 ### Removing shadows from face images
 Example of solving Principle Component Pusuit using Augmented Lagrangian Multipliers method 
 for decomposing face images (1-st row) into low-rank face approximation (2-nd row) and sparse shadows (3-rd row)
-<p align="center"><img src="figs/pcp_yale" width="700" /></p>
+<p align="center"><img src="figs/pcp_yale.png" width="700" /></p>
 
 ## Experiments accomplished
 We compare different tasks for removing shadows from face images and extracting background/foreground from video frames:
@@ -73,30 +73,30 @@ unzip data/mall_dataset.zip -d data
 ### Extracting activities on video surveillance
 
 #### PCP via ALM
-<p align="center"><img src="figs/pcp_mall" width="700" /></p>
+<p align="center"><img src="figs/pcp_mall.png" width="700" /></p>
 
 ---
 #### Stable PCP via alternating directions
-<p align="center"><img src="figs/stable_pcp_mall" width="700" /></p>
+<p align="center"><img src="figs/stable_pcp_mall.png" width="700" /></p>
 
 ---
 #### PCP via IRCUR
-<p align="center"><img src="figs/ircur_mall" width="700" /></p>
+<p align="center"><img src="figs/ircur_mall.png" width="700" /></p>
 
 ---
 
 ### Removing shadows from face images
 
 #### PCP via ALM
-<p align="center"><img src="figs/pcp_yale" width="700" /></p>
+<p align="center"><img src="figs/pcp_yale.png" width="700" /></p>
 
 ---
 #### Stable PCP via alternating directions
-<p align="center"><img src="figs/stable_pcp_yale" width="700" /></p>
+<p align="center"><img src="figs/stable_pcp_yale.png" width="700" /></p>
 
 ---
 #### PCP via IRCUR
-<p align="center"><img src="figs/ircur_yale" width="700" /></p>
+<p align="center"><img src="figs/ircur_yale.png" width="700" /></p>
 
 ---
 

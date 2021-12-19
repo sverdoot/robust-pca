@@ -72,7 +72,7 @@ unzip data/mall_dataset.zip -d data
 ## Results
 ### Extracting activities on video surveillance
 
-<p align="center"><img alt="PCP via ALM" src="figs/pcp_mall.pdf" width="700" /></p>
+<p align="center"><img alt="PCP via ALM" src="figs/test.png" width="700" /></p>
 
 ---
 #### Stable PCP via alternating directions
